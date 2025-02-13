@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -17,10 +18,16 @@ public class PizzeController {
     @Autowired
     private PizzaRepository repo;
     
-    @GetMapping("")
+    @GetMapping
     public String Homepage(Model model){
         List<Pizza> pizze = repo.findAll();
         model.addAttribute("pizze", pizze);
         return "homepage/index";
+    }
+
+    @GetMapping("/{id}")
+    public String Detailpage(@PathVariable("id") Integer id, Model model){
+        model.addAttribute("pizze", repo.findById(id).get());
+        return "homepage/show";
     }
 }
