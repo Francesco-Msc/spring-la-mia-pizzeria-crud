@@ -4,14 +4,20 @@
             <tr>
                 <th>Nome</th>
                 <th>Ingredienti</th>
-                <th>Prezzo</th>
+                <th class="text-center">Prezzo</th>
+                <th class="text-center">Vedi dettagli</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="pizza : ${pizze}">
                 <td th:text="${pizza.name}"></td>
                 <td th:text="${pizza.description}"></td>
-                <td th:text="${pizza.price}"></td>
+                <td class="text-center" th:text="${pizza.price}"></td>
+                <td class="text-center">
+                    <a th:href="${pizza.photo}" target="_blank">
+                        <i class="fa-solid fa-link"></i>
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>
