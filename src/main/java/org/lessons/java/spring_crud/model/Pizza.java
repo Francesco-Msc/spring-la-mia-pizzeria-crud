@@ -74,4 +74,8 @@ public class Pizza {
         this.price = price;
     }
 
+    @Override
+    public String toString(){
+        return String.format(this.name, this.description, this.price);
+    }
 }
