@@ -26,7 +26,7 @@ public class Pizze {
     private String description;
 
     @Lob
-    @Column(name = "photo URL", nullable = true)
+    @Column(name = "photo_URL", nullable = true)
     private String photo;
 
     @NotNull
