@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/homepage")
 public class PizzeController {
 
     @Autowired
     private PizzaRepository repo;
     
-    @GetMapping("/")
+    @GetMapping("")
     public String Homepage(Model model){
         List<Pizza> pizze = repo.findAll();
         model.addAttribute("pizze", pizze);
-        return "index";
+        return "homepage/index";
     }
 }
