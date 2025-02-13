@@ -1,0 +1,21 @@
+<div th:fragment="content" class="container">
+    <table class="table my-5 border shadow p-3 mb-5 bg-body-tertiary rounded" th:if="${pizze.size() > 0}">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Ingredienti</th>
+                <th>Prezzo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="pizza : ${pizze}">
+                <td th:text="${pizza.name}"></td>
+                <td th:text="${pizza.description}"></td>
+                <td th:text="${pizza.price}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <h2 th:unless="${pizze.size() > 0}" class="alert alert-warning mt-5 text-center" role="alert">
+        Non ci sono pizze nel menu
+    </h2>
+</div>
