@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/homepage")
@@ -19,15 +20,22 @@ public class PizzeController {
     private PizzaRepository repo;
     
     @GetMapping
-    public String Homepage(Model model){
+    public String homepage(Model model){
         List<Pizza> pizze = repo.findAll();
         model.addAttribute("pizze", pizze);
         return "homepage/index";
     }
 
     @GetMapping("/{id}")
-    public String Detailpage(@PathVariable("id") Integer id, Model model){
+    public String detailpage(@PathVariable("id") Integer id, Model model){
         model.addAttribute("pizze", repo.findById(id).get());
         return "homepage/show";
+    }
+
+    @GetMapping("/search")
+    public String findByKeyword(@RequestParam(name = "query") String query, Model model){
+        List<Pizza> pizze = repo.findByNameContainingOrDescriptionContaining(query, query);
+        model.addAttribute("pizze", pizze);
+        return "homepage/index";
     }
 }
