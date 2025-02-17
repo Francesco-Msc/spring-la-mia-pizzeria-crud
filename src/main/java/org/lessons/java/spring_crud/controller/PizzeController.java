@@ -38,4 +38,9 @@ public class PizzeController {
         model.addAttribute("pizze", pizze);
         return "homepage/index";
     }
+
+    @GetMapping("/cart")
+    public String cart(Model model){
+        return "homepage/cart";
+    }
 }
