@@ -30,3 +30,12 @@ body::before {
     width: auto;
     height: 100px;
 }
+
+.zoom-object{
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.zoom-object:hover, a:hover .zoom-object{
+    transform: scale(1.13);
+}
