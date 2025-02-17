@@ -1,5 +1,5 @@
 <div th:fragment="content" class="container text-center">
-    <div class="row">
+    <div class="row" th:if="${pizze.size() > 0}">
         <div th:each="pizza : ${pizze}" class="col-4 mb-4">
             <div class="card mt-5" style="width: 18rem;">
                 <div class="card-body d-flex flex-column">
@@ -9,11 +9,14 @@
                     <p class="card-text text-center mt-auto">Ingredienti: <br>[[${pizza.description}]]</p>
                     <p class="card-text text-center mb-3">Prezzo: <br>[[|${pizza.price} €|]]</p>
                     <div class="mt-auto d-flex justify-content-around">
-                        <a th:href="@{/homepage/{id}(id=${pizza.id})}" class="card-link btn btn-primary">See details</a>
-                        <a href="#" class="card-link btn btn-primary">Add to cart</a>
+                        <a th:href="@{/homepage/{id}(id=${pizza.id})}" role="button" class="card-link btn btn-primary">See details</a>
+                        <a href="#" class="card-link btn btn-primary disabled" role="button" aria-disabled="true">Add to cart</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <h2 th:unless="${pizze.size() > 0}" class="alert alert-warning mt-5 text-center" role="alert">
+        There are no pizzas in the menu
+    </h2>
 </div>
