@@ -1,5 +1,8 @@
 <div th:fragment="content" class="container">
-    <table class="table my-5 border shadow p-3 mb-5 bg-body-tertiary rounded" th:if="${pizze.size() > 0}">
+    <div class="d-flex justify-content-end">
+        <a th:href="@{/homepage/add}" class="btn btn-primary mt-4">Add a Pizza</a>
+    </div>
+    <table class="table my-4 border shadow p-3 mb-5 bg-body-tertiary rounded" th:if="${pizze.size() > 0}">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -24,6 +27,7 @@
     <h2 th:unless="${pizze.size() > 0}" class="alert alert-warning mt-5 text-center" role="alert">
         There are no pizzas available
     </h2>
+</div>
 
 
 
