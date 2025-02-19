@@ -2,7 +2,7 @@
     <div class="card text-center" th:each="pizza : ${pizze}">
         <div class="card-header">Dettagli sulla pizza</div>
         <div class="mt-4">
-            <img th:src="${pizza.photo}" alt="immagine_pizza" height="300px">
+            <img class="detail-img" th:src="${pizza.photo}" alt="immagine_pizza">
         </div>
         <div class="card-body">
           <h5 class="card-title" th:text="${pizza.name}"></h5>
