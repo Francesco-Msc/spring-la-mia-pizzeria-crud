@@ -6,7 +6,7 @@
 </head>
 <body>
     <header>
-        <div th:replace="~{fragments/navbar :: navbar}"></div>
+        <th:block th:replace="~{fragments/navbar :: navbar}" \>
     </header>
     <main>
         <div class="container alert alert-warning mt-5 text-center" role="alert">
@@ -14,6 +14,6 @@
             <a th:href="@{/homepage}" class="btn btn-primary mt-3" role="button">Homepage</a>
         </div>
     </main>
-    <div th:replace="~{fragments/fragments :: scripts}"></div>
+    <th:block th:replace="~{fragments/fragments :: scripts}" \>
 </body>
 </html>
