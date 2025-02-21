@@ -49,20 +49,38 @@ public class PizzeController {
         return "homepage/cart";
     }
     
-    @GetMapping("/add")
+    @GetMapping("/create-edit")
     public String create(Model model){
         model.addAttribute("pizza", new Pizza());
-        return "homepage/add";
+        model.addAttribute("create", true);
+        return "homepage/create-edit";
     }
 
-    @PostMapping("/add")
-    public String store(@Valid @ModelAttribute("pizza") Pizza addPizza, BindingResult bindingResult ,Model model){
+    @PostMapping("/create-edit")
+    public String store(@Valid @ModelAttribute("pizza") Pizza addPizza, BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
-            return "homepage/add";
+            model.addAttribute("create", true);
+            return "homepage/create-edit";
         }
 
         repo.save(addPizza);
+        return "redirect:/homepage";
+    }
+
+    @GetMapping("/create-edit/{id}")
+    public String edit(@PathVariable("id") Integer id ,Model model){
+        model.addAttribute("pizza", repo.findById(id).get());
+        return "homepage/create-edit";
+    }
+
+    @PostMapping("/create-edit/{id}")
+    public String update(@Valid @ModelAttribute("pizza") Pizza updatePizza, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            return "homepage/create-edit";
+        }
+
+        repo.save(updatePizza);
         return "redirect:/homepage";
     }
 }
