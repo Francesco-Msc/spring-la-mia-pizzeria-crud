@@ -5,11 +5,12 @@
     <table class="table my-4 border shadow p-3 mb-5 bg-body-tertiary rounded" th:if="${pizze.size() > 0}">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Ingredienti</th>
-                <th class="text-center">Prezzo</th>
-                <th class="text-center">Vedi dettagli</th>
-                <th class="text-center">Modifica</th>
+                <th>Name</th>
+                <th>Ingredients</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">See details</th>
+                <th class="text-center">Edit</th>
+                <th class="text-center">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +24,12 @@
                     </a>
                 </td>
                 <td class="text-center">
-                    <a th:href="@{/homepage/create-edit/{id}(id=*{id})}" class="btn-sm btn-warning text-decoration-none">Edit</a>
+                    <a th:href="@{/homepage/create-edit/{id}(id=*{id})}" class="btn btn-sm btn-warning text-decoration-none">Edit</a>
+                </td>
+                <td class="text-center">
+                    <form th:action="@{/homepage/delete/{id}(id=*{id})}" method="post">
+                        <input type="submit" class="btn btn-sm btn-danger text-decoration-none" value="Delete" \>
+                    </form>
                 </td>
             </tr>
         </tbody>
