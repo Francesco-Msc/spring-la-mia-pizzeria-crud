@@ -1,6 +1,6 @@
 <div th:fragment="content" class="container">
     <div class="d-flex justify-content-end">
-        <a th:href="@{/homepage/add}" class="btn btn-primary mt-4">Add a Pizza</a>
+        <a th:href="@{/homepage/create-edit}" class="btn btn-primary mt-4">Add a Pizza</a>
     </div>
     <table class="table my-4 border shadow p-3 mb-5 bg-body-tertiary rounded" th:if="${pizze.size() > 0}">
         <thead>
@@ -9,17 +9,21 @@
                 <th>Ingredienti</th>
                 <th class="text-center">Prezzo</th>
                 <th class="text-center">Vedi dettagli</th>
+                <th class="text-center">Modifica</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="pizza : ${pizze}">
-                <td th:text="${pizza.name}"></td>
-                <td th:text="${pizza.description}"></td>
-                <td class="text-center" th:text="|${pizza.price} €|"></td>
+            <tr th:each="pizza : ${pizze}" th:object="${pizza}">
+                <td th:text="*{name}"></td>
+                <td th:text="*{description}"></td>
+                <td class="text-center" th:text="|*{price} €|"></td>
                 <td class="text-center">
-                    <a th:href="@{/homepage/{id}(id=${pizza.id})}">
+                    <a th:href="@{/homepage/{id}(id=*{id})}">
                         <i class="fa-solid fa-link"></i>
                     </a>
+                </td>
+                <td class="text-center">
+                    <a th:href="@{/homepage/create-edit/{id}(id=*{id})}" class="btn-sm btn-warning text-decoration-none">Edit</a>
                 </td>
             </tr>
         </tbody>

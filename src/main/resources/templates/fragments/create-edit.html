@@ -1,6 +1,8 @@
 <div th:fragment="form" class="container shadow p-3 mt-5 bg-white border rounded">
-    <h3 class="text-center mt-3">Add a Pizza</h3>
-    <form th:action="@{/homepage/add}" method="post" th:object="${pizza}">
+    <h3 th:if="${create}" class="text-center mt-3">Add a Pizza</h3>
+    <h3 th:unless="${create}" class="text-center mt-3">Editing "[[${pizza.name}]]"</h3>
+
+    <form th:action="${create} ? @{/homepage/create-edit} : @{|/homepage/create-edit/${pizza.id}|}" method="post" th:object="${pizza}">
         <div class="mb-3">
             <label for="name" class="form-label">Pizza name</label>
             <input type="text" class="form-control" id="name" th:field="*{name}" th:errorClass="is-invalid">
@@ -36,7 +38,7 @@
             <textarea name="photo" class="form-control" id="photo_url" th:field="*{photo}"></textarea>
         </div>
         <div class="d-flex justify-content-center">
-            <button type="submit" class="px-4 btn btn-primary my-2">Add</button>
+            <input type="submit" value="Save" class="px-4 btn btn-primary my-2"></input>
         </div>
     </form>
 </div>
