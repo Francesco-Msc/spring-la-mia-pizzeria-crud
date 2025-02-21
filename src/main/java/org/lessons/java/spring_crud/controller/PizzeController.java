@@ -83,4 +83,11 @@ public class PizzeController {
         repo.save(updatePizza);
         return "redirect:/homepage";
     }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id, Model model){
+        Pizza deletePizza = repo.findById(id).get();
+        repo.delete(deletePizza);
+        return "redirect:/homepage";
+    }
 }
