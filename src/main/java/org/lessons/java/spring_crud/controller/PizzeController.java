@@ -1,9 +1,8 @@
 package org.lessons.java.spring_crud.controller;
 
-import java.util.List;
 
 import org.lessons.java.spring_crud.model.Pizza;
-import org.lessons.java.spring_crud.repository.PizzaRepository;
+import org.lessons.java.spring_crud.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,25 +21,23 @@ import jakarta.validation.Valid;
 public class PizzeController {
 
     @Autowired
-    private PizzaRepository repo;
+    private PizzaService pizzaService;
     
     @GetMapping
     public String homepage(Model model){
-        List<Pizza> pizze = repo.findAll();
-        model.addAttribute("pizze", pizze);
+        model.addAttribute("pizze", pizzaService.findAll());
         return "homepage/index";
     }
 
     @GetMapping("/{id}")
     public String detailpage(@PathVariable("id") Integer id, Model model){
-        model.addAttribute("pizze", repo.findById(id).get());
+        model.addAttribute("pizze", pizzaService.getById(id));
         return "homepage/show";
     }
 
     @GetMapping("/search")
     public String findByKeyword(@RequestParam(name = "query") String query, Model model){
-        List<Pizza> pizze = repo.findByNameContainingOrDescriptionContaining(query, query);
-        model.addAttribute("pizze", pizze);
+        model.addAttribute("pizze", pizzaService.findByQuery(query));
         return "homepage/index";
     }
 
@@ -64,13 +61,13 @@ public class PizzeController {
             return "homepage/create-edit";
         }
 
-        repo.save(addPizza);
+        pizzaService.createPizza(addPizza);
         return "redirect:/homepage";
     }
 
     @GetMapping("/create-edit/{id}")
     public String edit(@PathVariable("id") Integer id ,Model model){
-        model.addAttribute("pizza", repo.findById(id).get());
+        model.addAttribute("pizza", pizzaService.getById(id));
         return "homepage/create-edit";
     }
 
@@ -80,14 +77,13 @@ public class PizzeController {
             return "homepage/create-edit";
         }
 
-        repo.save(updatePizza);
+        pizzaService.updatePizza(updatePizza);
         return "redirect:/homepage";
     }
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id, Model model){
-        Pizza deletePizza = repo.findById(id).get();
-        repo.delete(deletePizza);
+        pizzaService.delete(pizzaService.getById(id));;
         return "redirect:/homepage";
     }
 }
