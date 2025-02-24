@@ -1,9 +1,9 @@
 <th:block th:fragment="content">
     <div class="container">
         <div class="d-flex justify-content-end">
-            <a th:href="@{/homepage/create-edit}" class="btn btn-primary mt-4">Add a Pizza</a>
+            <a th:href="@{/homepage/create-edit}" class="btn btn-primary mt-3">Add a Pizza</a>
         </div>
-        <table class="table my-4 border shadow p-3 mb-5 bg-body-tertiary rounded" th:if="${pizze.size() > 0}">
+        <table class="table my-3 border shadow p-3 mb-5 bg-body-tertiary rounded" th:if="${pizze.size() > 0}">
             <thead>
                 <tr>
                     <th>Name</th>
